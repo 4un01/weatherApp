@@ -4,7 +4,7 @@ import styles from './App.module.css';
 function App() {
   const [count, setCount] = useState(0)
   const [inp, setInp] = useState('');
-  const [weatherObj, setWeatherObj] = useState({});
+  const [weatherObj, setWeatherObj] = useState(null);
 
   async function getWeatherDetails(){
     try{
@@ -37,11 +37,16 @@ function App() {
           <input type="text" className={styles.countryInp} onChange={(event) => setInp(event.target.value)} value={inp}/>
           <button className={styles.getWeatherBtn} onClick={getWeatherDetails}>Get Weather</button>  
         </div>
-        <h1>{inp}</h1>
       </div>
-      <div>
-        <h1>{JSON.stringify(weatherObj)}</h1>
-      </div>
+      {weatherObj && (
+        <div className={styles.results}>
+          <h1 className={styles.city}>{weatherObj.city}</h1>
+          <h1 className={styles.temp}>{`${weatherObj.temp}°C`}</h1>
+          <p className={styles.humidity}>{`Humidity: ${weatherObj.humidity}%`}</p>
+          <p className={styles.weatherDesc}>{weatherObj.desc}</p>
+          <p className={styles.weatherIcon}>{weatherObj.code}</p>
+        </div>
+      )}
     </>
   )
 }
