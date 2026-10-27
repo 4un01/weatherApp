@@ -22,9 +22,12 @@ function App() {
           humidity: jsonRes.humidityInfo,
           desc: jsonRes.description
         }));
+      }else{
+        const errMsg = await response.json()
+        throw new Error(errMsg.error);
       }
     }catch(e){
-      console.log(e.message);
+      window.alert(e.message);
     };
   }
 

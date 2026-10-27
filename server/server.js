@@ -12,35 +12,35 @@ app.post('/api/weather', async (req, res) => {
 
     const weatherInfo = await requestWeatherData(userInput);
 
-    res.status(200).json(weatherInfo);
+    res.status(weatherInfo.status).json(weatherInfo.info);
 });
 
 async function requestWeatherData(city) {
-
     try{
         const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${api}`);
         if(response.ok){
             const jsonResponse = await response.json();
-            const id = jsonResponse.weather[0].id;
-            const name = jsonResponse.name;
-            const temp = Math.round(jsonResponse.main.temp);
-            const humidity = jsonResponse.main.humidity;
-            const weatherDesc = jsonResponse.weather[0].description;
             const weatherInfo = {
-                code: id,
-                nameInfo: name,
-                tempInfo: temp,
-                humidityInfo: humidity,
-                description: weatherDesc
+                code: jsonResponse.weather[0].id,
+                nameInfo: jsonResponse.name,
+                tempInfo: Math.round(jsonResponse.main.temp),
+                humidityInfo: jsonResponse.main.humidity,
+                description: jsonResponse.weather[0].description
             };
-            
-            return weatherInfo;
+            return { status: 200, info: weatherInfo };
         }else{
             const errorResponse = await response.json();
-            console.log(`Something went wrong: ${errorResponse}`)
+            const error = new Error(errorResponse.message);
+            error.status = Number(errorResponse.cod);
+            throw error;
         }
     }catch(err){
-        console.log(`Something went wrong: ${err}`)
+        console.log(`Something went wrong: ${err.message}`);
+        const status = err.status || 500;
+        return {
+            status: status,
+            info: { error: `${status}: ${err.message}` }
+        };
     }
 }
 
