@@ -46,6 +46,24 @@ function App() {
     }
   }
 
+  function getWeatherBackground(code){
+    if(code >= 200 && code <= 232){
+      return 'thunderstorm';
+    }else if(code >= 300 && code <= 321){
+      return 'sunnyStorm';      
+    }else if(code >= 500 && code <= 531){
+      return 'rain';
+    }else if(code >= 600 && code <= 622){
+      return 'snow';      
+    }else if(code >= 701 && code <= 781){
+      return 'tornado';      
+    }else if(code === 800){
+      return 'sunny';
+    }else if(code >= 800 && code <= 804){
+      return 'cloudy';
+    }
+  }
+
   return (
     <>
       <div className={styles.main}>
@@ -57,7 +75,7 @@ function App() {
         </div>
       </div>
       {weatherObj && (
-        <div className={styles.results}>
+        <div className={`${styles.results} ${styles[getWeatherBackground(weatherObj.code)]}`}>
           <h1 className={styles.city}>{weatherObj.city}</h1>
           <h1 className={styles.temp}>{`${weatherObj.temp}°C`}</h1>
           <p className={styles.humidity}>{`Humidity: ${weatherObj.humidity}%`}</p>

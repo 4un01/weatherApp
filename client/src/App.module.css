@@ -48,6 +48,28 @@
   margin-top: 25px;
   border-radius: 10px;
   box-shadow: 5px 5px 8px hsl(0, 0%, 59%);
+  &.thunderstorm{
+    background-image: linear-gradient(to bottom, hsl(240, 20%, 30%), hsl(240, 15%, 50%));
+    color: white;
+  }
+  &.sunnyStorm{
+    background-image: linear-gradient(to bottom, hsl(200, 30%, 60%), hsl(200, 20%, 75%));
+  }
+  &.rain{
+    background-image: linear-gradient(to bottom, hsl(210, 40%, 45%), hsl(210, 20%, 65%));
+  }
+  &.snow{
+    background-image: linear-gradient(to bottom, hsl(200, 30%, 80%), hsl(0, 0%, 95%));
+  }
+  &.tornado{
+    background-image: linear-gradient(to bottom, hsl(0, 0%, 70%), hsl(0, 0%, 85%));
+  }
+  &.sunny{
+    background-image: linear-gradient(to bottom, hsl(210, 100%, 75%), hsl(40, 100%, 75%));
+  }
+  &.cloudy{
+    background-image: linear-gradient(to bottom, hsl(210, 30%, 70%), hsl(0, 0%, 80%));
+  }
 }
 
 .city{
