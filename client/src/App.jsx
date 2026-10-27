@@ -28,6 +28,24 @@ function App() {
     };
   }
 
+  function getWeatherIcon(code){
+    if(code >= 200 && code <= 232){
+      return '⛈️';
+    }else if(code >= 300 && code <= 321){
+      return '🌦️';      
+    }else if(code >= 500 && code <= 531){
+      return '🌧️';
+    }else if(code >= 600 && code <= 622){
+      return '❄️';      
+    }else if(code >= 701 && code <= 781){
+      return '🌪️';      
+    }else if(code === 800){
+      return '☀️';
+    }else if(code >= 800 && code <= 804){
+      return '☁️';
+    }
+  }
+
   return (
     <>
       <div className={styles.main}>
@@ -44,7 +62,7 @@ function App() {
           <h1 className={styles.temp}>{`${weatherObj.temp}°C`}</h1>
           <p className={styles.humidity}>{`Humidity: ${weatherObj.humidity}%`}</p>
           <p className={styles.weatherDesc}>{weatherObj.desc}</p>
-          <p className={styles.weatherIcon}>{weatherObj.code}</p>
+          <p className={styles.weatherIcon}>{getWeatherIcon(weatherObj.code)}</p>
         </div>
       )}
     </>
