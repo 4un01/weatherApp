@@ -8,7 +8,7 @@ function App() {
 
   async function getWeatherDetails(){
     try{
-      const res = await fetch('/api/weather', {
+      const response = await fetch('/api/weather', {
         method: 'POST',
         headers: {'Content-Type': 'text/plain'},
         body: inp
@@ -16,7 +16,7 @@ function App() {
       if(response.ok){
         const jsonRes = await response.json();
         setWeatherObj((res) => ({
-          code: jsonRes.id,
+          code: jsonRes.code,
           city: jsonRes.nameInfo,
           temp: jsonRes.tempInfo,
           humidity: jsonRes.humidityInfo,
@@ -38,6 +38,9 @@ function App() {
           <button className={styles.getWeatherBtn} onClick={getWeatherDetails}>Get Weather</button>  
         </div>
         <h1>{inp}</h1>
+      </div>
+      <div>
+        <h1>{JSON.stringify(weatherObj)}</h1>
       </div>
     </>
   )

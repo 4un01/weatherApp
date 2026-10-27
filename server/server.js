@@ -7,7 +7,7 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.text());
 
-app.post('/', async (req, res) => {
+app.post('/api/weather', async (req, res) => {
     const userInput = req.body;
 
     const weatherInfo = await requestWeatherData(userInput);

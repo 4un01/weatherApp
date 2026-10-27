@@ -10,7 +10,7 @@ async function getWeatherDetails(){
     const weatherIcon = document.getElementById('weatherIcon');
 
     try{
-        const response = await fetch('/', {
+        const response = await fetch('/api/weather', {
             method: 'POST',
             headers: {'Content-Type': 'text/plain'},
             body: input.value
