@@ -3,7 +3,7 @@ import express from 'express';
 const PORT = process.env.PORT || 8000
 const api = process.env.WEATHER_API_KEY;
 const app = express();
-app.use(express.static('public'));
+app.use(express.static('../client/dist'));
 app.use(express.json());
 app.use(express.text());
 
