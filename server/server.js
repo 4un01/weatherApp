@@ -9,6 +9,9 @@ app.use(express.text());
 
 app.post('/api/weather', async (req, res) => {
     const userInput = req.body;
+    if(typeof userInput != 'string' || userInput.trim() === '' || userInput.length > 50){
+        res.status(400);
+    }
 
     const weatherInfo = await requestWeatherData(userInput);
 

@@ -2,7 +2,6 @@ import { useState } from 'react'
 import styles from './App.module.css';
 
 function App() {
-  const [count, setCount] = useState(0)
   const [inp, setInp] = useState('');
   const [weatherObj, setWeatherObj] = useState(null);
 
@@ -15,7 +14,8 @@ function App() {
       });
       if(response.ok){
         const jsonRes = await response.json();
-        setWeatherObj((res) => ({
+        setWeatherObj((prev) => ({
+          ...prev,
           code: jsonRes.code,
           city: jsonRes.nameInfo,
           temp: jsonRes.tempInfo,
