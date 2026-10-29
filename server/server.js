@@ -15,7 +15,9 @@ app.post('/api/weather', async (req, res) => {
         });
     }
 
-    const weatherInfo = await requestWeatherData(userInput);
+    const encodedInp = encodeURIComponent(userInput.trim());
+
+    const weatherInfo = await requestWeatherData(encodedInp);
 
     return res.status(weatherInfo.status).json(weatherInfo.info);
 });
