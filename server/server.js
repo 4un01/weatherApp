@@ -10,12 +10,14 @@ app.use(express.text());
 app.post('/api/weather', async (req, res) => {
     const userInput = req.body;
     if(typeof userInput != 'string' || userInput.trim() === '' || userInput.length > 50){
-        res.status(400);
+        return res.status(400).json({
+            error: `400: Incorrect input`
+        });
     }
 
     const weatherInfo = await requestWeatherData(userInput);
 
-    res.status(weatherInfo.status).json(weatherInfo.info);
+    return res.status(weatherInfo.status).json(weatherInfo.info);
 });
 
 async function requestWeatherData(city) {
